@@ -1,0 +1,16 @@
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\bin\Debug\Banking System Prototype.exe.config
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\bin\Debug\Banking System Prototype.exe
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\bin\Debug\Banking System Prototype.pdb
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.csproj.AssemblyReference.cache
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.csproj.SuggestedBindingRedirects.cache
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\MainWindow.g.cs
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\App.g.cs
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype_MarkupCompile.cache
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype_MarkupCompile.lref
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\MainWindow.baml
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.g.resources
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking_System_Prototype.Properties.Resources.resources
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.csproj.GenerateResource.cache
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.csproj.CoreCompileInputs.cache
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.exe
+C:\D\Programming\Desktop\C#\Study\Banking System Prototype\Banking System Prototype\obj\Debug\Banking System Prototype.pdb

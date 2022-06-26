@@ -1,0 +1,52 @@
+﻿<Window x:Class="Banking_System_Prototype.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Banking_System_Prototype"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="lvClients" Margin="456,9,10,9" SelectionChanged="lvClients_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" Width="100"/>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
+                    <GridViewColumn Header="Номер телефона" DisplayMemberBinding="{Binding PhoneNumber}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="lvAccounts" Margin="335,10,349,280" >
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                    <GridViewColumn Header="Money" DisplayMemberBinding="{Binding Money}" Width="80"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Content="Добавить клиента" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="107" Click="ButtonAddClient_Click"/>
+        <Button Content="Открыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,54,0,0" Click="ButtonAddAccount_Click"/>
+        <Button Content="Закрыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,91,0,0" Click="ButtonRemoveAccount_Click"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="39,10,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top"/>
+        <TextBox x:Name="LastName" HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="107"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="52,54,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" RenderTransformOrigin="0.725,0.483"/>
+        <TextBox x:Name="FirstName" HorizontalAlignment="Left" Margin="10,75,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="107"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="17,98,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
+        <TextBox x:Name="PhoneNumber" HorizontalAlignment="Left" Margin="10,119,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="107"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="168,10,0,0" TextWrapping="Wrap" Text="Деньги" VerticalAlignment="Top" Width="42"/>
+        <TextBox x:Name="Money" HorizontalAlignment="Left" Margin="150,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="232,31,0,0" VerticalAlignment="Top" Width="98">
+            <TextBlock>Депозитный</TextBlock>
+            <TextBlock>Недепозитный</TextBlock>
+        </ComboBox>
+
+    </Grid>
+</Window>
