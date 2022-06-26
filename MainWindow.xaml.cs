@@ -25,6 +25,10 @@ namespace Banking_System_Prototype
         {
             repository = new Repository();
             repository.AddClient("badin", "roma", "891121212");
+            repository.OpenBankAccount(1, 10000);
+            repository.OpenBankAccount(1, 20000);
+            repository.OpenBankAccount(1, 30000);
+
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();
         }

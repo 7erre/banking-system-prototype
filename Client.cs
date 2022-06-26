@@ -63,7 +63,7 @@ namespace Banking_System_Prototype
             if (bank_accounts.Count == 0)
                 return 1;
             int i = 0;
-            bank_accounts.Sort();   // Сделать сортировку по Id
+            //bank_accounts.Sort();   // Сделать сортировку по Id
             foreach (var el in bank_accounts)
             {
                 i++;
