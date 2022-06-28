@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
@@ -55,6 +56,22 @@ namespace Banking_System_Prototype
             }
         }
 
+        /// <summary>
+        /// Загружает банковские счета пользователя из Json файла
+        /// </summary>
+        /// <param name="json">bank_account</param>
+        public void LoadBankAccounts(JToken json)
+        {
+            foreach (var item in json)
+            {
+                bank_accounts.Add(new Bank_Account(int.Parse(item["id"].ToString()),int.Parse(item["money"].ToString())));
+            }
+        }
+
+        /// <summary>
+        /// Получает банковские счета в виде JArray
+        /// </summary>
+        /// <returns>JArray</returns>
         public JArray GetBank_Accounts()
         {
             JArray accountsArray = new JArray();

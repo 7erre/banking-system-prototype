@@ -67,12 +67,33 @@ namespace Banking_System_Prototype
             return clients;
         }
 
+        /// <summary>
+        /// Загрузка клиентов в List
+        /// </summary>
+        public void Load()
+        {
+            if (!File.Exists("Clients.json"))
+                return;
+            string json = File.ReadAllText("Clients.json");
+            if (!Convert.ToBoolean(JObject.Parse(json)["ok"]))
+                return;
+
+            var loadedClients=JObject.Parse(json)["clients"].ToList();
+            foreach (var item in loadedClients)
+            {
+                clients.Add(new Client(int.Parse(item["id"].ToString()), item["last_name"].ToString(), item["first_name"].ToString(), item["phone_number"].ToString()));
+                clients[int.Parse(item["id"].ToString()) - 1].LoadBankAccounts(item["bank_account"]);
+            }
+        }
+
+        /// <summary>
+        /// Сохранение клиентов в json файл
+        /// </summary>
         public void Save()
         {
             if (File.Exists("Clients.json"))
-            {
                 File.Delete("Clients.json");
-            }
+
             JArray clientsArray = new JArray();
             JObject mainTree = new JObject
             {
@@ -89,9 +110,7 @@ namespace Banking_System_Prototype
                     ["bank_account"] = clients[client.Id - 1].GetBank_Accounts()
                 };
                 clientsArray.Add(clientObj);
-                
             }
-
             mainTree["clients"]=clientsArray;
             string json = mainTree.ToString();
             File.AppendAllText("Clients.json", json);

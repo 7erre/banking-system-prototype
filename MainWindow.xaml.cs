@@ -20,14 +20,15 @@ namespace Banking_System_Prototype
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Repository repository;
+        private readonly Repository repository;
         public MainWindow()
         {
             repository = new Repository();
-            repository.AddClient("badin", "roma", "891121212");
-            repository.OpenBankAccount(1, 10000);
-            repository.OpenBankAccount(1, 20000);
-            repository.OpenBankAccount(1, 30000);
+            repository.Load();
+            //repository.AddClient("badin", "roma", "891121212");
+            //repository.OpenBankAccount(1, 10000);
+            //repository.OpenBankAccount(1, 20000);
+            //repository.OpenBankAccount(1, 30000);
 
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();
