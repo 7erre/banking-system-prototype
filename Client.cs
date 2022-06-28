@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Banking_System_Prototype
 {
     internal class Client
     {
-        private List<Bank_Account> bank_accounts = new List<Bank_Account>();
+        private readonly List<Bank_Account> bank_accounts = new List<Bank_Account>();
 
         /// <summary>
         /// Id клиента
@@ -53,6 +55,20 @@ namespace Banking_System_Prototype
             }
         }
 
+        public JArray GetBank_Accounts()
+        {
+            JArray accountsArray = new JArray();
+            foreach (var account in bank_accounts)
+            {
+                JObject accountObj = new JObject()
+                {
+                    ["id"] = account.Id,
+                    ["money"] = account.Money
+                };
+                accountsArray.Add(accountObj);
+            }
+            return accountsArray;
+        }
 
         /// <summary>
         /// Устанавливает Id банковского счета

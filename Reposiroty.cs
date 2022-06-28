@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Banking_System_Prototype
 {
     internal class Repository
     {
-        private List<Client> clients = new List<Client>();
+        private readonly List<Client> clients = new List<Client>();
         public void AddClient(string LastName, string FirstName, string PhoneNumber)
         {
             clients.Add(new Client(SetId(), LastName, FirstName, PhoneNumber));
+        }
+
+        /// <summary>
+        /// Устанавливает Id клиенту
+        /// </summary>
+        /// <returns>Id</returns>
+        private int SetId()
+        {
+            if (clients.Count == 0)
+                return 1;
+            return clients.Count + 1;
         }
 
         /// <summary>
@@ -35,17 +49,6 @@ namespace Banking_System_Prototype
         }
 
         /// <summary>
-        /// Устанавливает Id клиенту
-        /// </summary>
-        /// <returns>Id</returns>
-        private int SetId()
-        {
-            if (clients.Count == 0)
-                return 1;
-            return clients.Count + 1;
-        }
-
-        /// <summary>
         /// Список банковских считов у клиента
         /// </summary>
         /// <param name="id">Id клиента</param>
@@ -63,5 +66,37 @@ namespace Banking_System_Prototype
         {
             return clients;
         }
+
+        public void Save()
+        {
+            if (File.Exists("Clients.json"))
+            {
+                File.Delete("Clients.json");
+            }
+            JArray clientsArray = new JArray();
+            JObject mainTree = new JObject
+            {
+                ["ok"] = true
+            };
+            foreach (var client in clients)
+            {
+                JObject clientObj = new JObject
+                {
+                    ["id"] = client.Id,
+                    ["last_name"] = client.LastName,
+                    ["first_name"] = client.FirstName,
+                    ["phone_number"] = client.PhoneNumber,
+                    ["bank_account"] = clients[client.Id - 1].GetBank_Accounts()
+                };
+                clientsArray.Add(clientObj);
+                
+            }
+
+            mainTree["clients"]=clientsArray;
+            string json = mainTree.ToString();
+            File.AppendAllText("Clients.json", json);
+
+        }
+
     }
 }

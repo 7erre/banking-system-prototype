@@ -46,6 +46,7 @@ namespace Banking_System_Prototype
             if (lvClients.SelectedItem == null) return;
 
             repository.OpenBankAccount((lvClients.SelectedItem as Client).Id, int.Parse(Money.Text));
+            repository.Save();
             lvAccounts.Items.Refresh();
         }
 
@@ -53,12 +54,14 @@ namespace Banking_System_Prototype
         {
             if (lvAccounts.SelectedItem == null) return;
             repository.CloseBankAccount((lvClients.SelectedItem as Client).Id, (lvAccounts.SelectedItem as Bank_Account).Id);
+            repository.Save();
             lvAccounts.Items.Refresh();
         }
 
         private void ButtonAddClient_Click(object sender, RoutedEventArgs e)
         {
             repository.AddClient(LastName.Text, FirstName.Text, PhoneNumber.Text);
+            repository.Save();
             lvClients.Items.Refresh();
         }
     }
