@@ -36,13 +36,12 @@ namespace Banking_System_Prototype
 
         private void ButtonAddAccount_Click(object sender, RoutedEventArgs e)
         {
-            if (!int.TryParse(Money.Text, out _)) return;
 
             if (lvClients.SelectedItem == null) return;
 
             if (string.IsNullOrWhiteSpace(comboBox.Text)) { MessageBox.Show("Выберите тип счета"); return; }
 
-            repository.OpenBankAccount((lvClients.SelectedItem as Client).Id, int.Parse(Money.Text),comboBox.Text);
+            repository.OpenBankAccount((lvClients.SelectedItem as Client).Id,comboBox.Text);
             repository.Save();
             lvAccounts.Items.Refresh();
         }
@@ -62,11 +61,6 @@ namespace Banking_System_Prototype
             lvClients.Items.Refresh();
         }
 
-        public void ShowErr()
-        {
-            
-        }
-
         private void ButtonTransferAmount_Click(object sender, RoutedEventArgs e)
         {
 
@@ -76,6 +70,18 @@ namespace Banking_System_Prototype
                 return;
             }
             MessageBox.Show("Перевод успешно выполнен!");
+            repository.Save();
+            lvAccounts.Items.Refresh();
+        }
+
+        private void ButtonTopUpAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (!int.TryParse(Money.Text, out _)) return;
+
+            if (lvClients.SelectedItem == null || lvAccounts.SelectedItem == null) return;
+
+            repository.TopUpAccount((lvClients.SelectedItem as Client).Id,(lvAccounts.SelectedItem as Bank_Account).Id, int.Parse(Money.Text));
+            repository.Save();
             lvAccounts.Items.Refresh();
         }
     }

@@ -80,6 +80,17 @@ namespace Banking_System_Prototype
         }
 
         /// <summary>
+        /// Пополнение банковского счета 
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="accountId"></param>
+        /// <param name="money"></param>
+        public void TopUpAccount(int clientId, int accountId, int money)
+        {
+            clients[clientId-1].AddMoney(accountId, money);
+        }
+
+        /// <summary>
         /// Устанавливает Id клиенту
         /// </summary>
         /// <returns>Id</returns>
@@ -95,9 +106,9 @@ namespace Banking_System_Prototype
         /// </summary>
         /// <param name="id">Id клинта </param>
         /// <param name="money">Деньги</param>
-        public void OpenBankAccount(int id, int money, string type)
+        public void OpenBankAccount(int id, string type)
         {
-            clients[id - 1].AddBankAccount(money,type);
+            clients[id - 1].AddBankAccount(type);
         }
 
         /// <summary>

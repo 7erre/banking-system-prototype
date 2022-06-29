@@ -18,19 +18,19 @@
             </ListView.View>
         </ListView>
 
-        <ListView x:Name="lvAccounts" Margin="242,10,349,280" >
+        <ListView x:Name="lvAccounts" Margin="242,10,349,310" >
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
-                    <GridViewColumn Header="Money" DisplayMemberBinding="{Binding Money}" Width="80"/>
+                    <GridViewColumn Header="Money" DisplayMemberBinding="{Binding Money}" Width="70"/>
                     <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="95"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
         <Button Content="Добавить клиента" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="107" Click="ButtonAddClient_Click"/>
-        <Button Content="Открыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,54,0,0" Click="ButtonAddAccount_Click"/>
-        <Button Content="Закрыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,91,0,0" Click="ButtonRemoveAccount_Click"/>
+        <Button Content="Открыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,25,0,0" Click="ButtonAddAccount_Click"/>
+        <Button Content="Закрыть счёт" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,55,0,0" Click="ButtonRemoveAccount_Click"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="39,10,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top"/>
         <TextBox x:Name="LastName" HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="107"/>
@@ -41,34 +41,35 @@
         <TextBlock HorizontalAlignment="Left" Margin="17,98,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
         <TextBox x:Name="PhoneNumber" HorizontalAlignment="Left" Margin="10,119,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="107"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="168,10,0,0" TextWrapping="Wrap" Text="Деньги" VerticalAlignment="Top" Width="42"/>
-        <TextBox x:Name="Money" HorizontalAlignment="Left" Margin="150,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Margin="12,225,0,0" TextWrapping="Wrap" Text="Сумма пополнения" VerticalAlignment="Top" Width="110"/>
+        <TextBox x:Name="Money" HorizontalAlignment="Left" Margin="25,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
 
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="139,145,0,0" VerticalAlignment="Top" Width="98">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="139,113,0,0" VerticalAlignment="Top" Width="98">
             <TextBlock>Депозитный</TextBlock>
             <TextBlock>Недепозитный</TextBlock>
         </ComboBox>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="От кого" Margin="57,250,0,0"/>
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Кому" Margin="312,250,0,0"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="От кого" Margin="274,128,0,0"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Кому" Margin="0,128,0,0"/>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id пользователя" Margin="282,271,0,0"/>
-        <TextBox x:Name="FromClientId" HorizontalAlignment="Left" Margin="52,292,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Id пользователя" Margin="0,149,0,0"/>
+        <TextBox x:Name="FromClientId" HorizontalAlignment="Left" Margin="269,170,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id пользователя" Margin="34,271,0,0"/>
-        <TextBox x:Name="ToClientId" HorizontalAlignment="Left" Margin="296,292,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id пользователя" Margin="251,149,0,0"/>
+        <TextBox x:Name="ToClientId" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id счёта" Margin="60,326,0,0"/>
-        <TextBox x:Name="FromAccountId" HorizontalAlignment="Left" Margin="50,347,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id счёта" Margin="277,204,0,0"/>
+        <TextBox x:Name="FromAccountId" HorizontalAlignment="Left" Margin="267,225,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id счёта" Margin="304,326,0,0"/>
-        <TextBox x:Name="ToAccountId" HorizontalAlignment="Left" Margin="296,347,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Id счёта" Margin="0,204,0,0"/>
+        <TextBox x:Name="ToAccountId" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Сумма перевода" Margin="152,334,0,0"/>
-        <TextBox x:Name="TransferAmount" HorizontalAlignment="Left" Margin="168,356,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Сумма перевода" Margin="302,248,0,0"/>
+        <TextBox x:Name="TransferAmount" HorizontalAlignment="Left" Margin="318,270,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <Button Content="Перевод" HorizontalAlignment="Left" Margin="166,391,0,0" VerticalAlignment="Top" Width="61" Click="ButtonTransferAmount_Click"/>
-        <Label Content="Тип счета" HorizontalAlignment="Left" Margin="156,119,0,0" VerticalAlignment="Top"/>
+        <Button Content="Перевод" HorizontalAlignment="Left" Margin="316,305,0,0" VerticalAlignment="Top" Width="61" Click="ButtonTransferAmount_Click"/>
+        <Label Content="Тип счета" HorizontalAlignment="Left" Margin="157,82,0,0" VerticalAlignment="Top"/>
+        <Button Content="Пополнить" HorizontalAlignment="Left" Margin="25,272,0,0" VerticalAlignment="Top" Width="77" Click="ButtonTopUpAccount_Click"/>
 
 
     </Grid>

@@ -33,10 +33,44 @@ namespace Banking_System_Prototype
         public string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Проверяет существует ли счет с таким Id
+        /// </summary>
+        /// <param name="id">Id счета</param>
+        /// <returns></returns>
+        public bool CheckId(int id)
+        {
+            foreach (var item in bank_accounts)
+            {
+                if (item.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Устанавливает Id банковского счета
+        /// </summary>
+        /// <returns>Id</returns>
+        private int SetBankAccountId()
+        {
+            if (bank_accounts.Count == 0)
+                return 1;
+            int i = 0;
+            foreach (var el in bank_accounts)
+            {
+                i++;
+                if (el.Id != i)
+                    return i;
+            }
+            return bank_accounts.Count + 1;
+
+        }
+
+        /// <summary>
         /// Открывает банковский счет у клиента
         /// </summary>
         /// <param name="money">Деньги</param>
-        public void AddBankAccount(int money, string type)
+        public void AddBankAccount( string type)
         {
             if (bank_accounts.Count == 2)
             {
@@ -51,7 +85,7 @@ namespace Banking_System_Prototype
                     return;
                 }
             }
-            bank_accounts.Add(new Bank_Account(SetBankAccountId(), money, type));
+            bank_accounts.Add(new Bank_Account(SetBankAccountId(), 0, type));
         }
 
         /// <summary>
@@ -100,40 +134,6 @@ namespace Banking_System_Prototype
                 accountsArray.Add(accountObj);
             }
             return accountsArray;
-        }
-
-        /// <summary>
-        /// Проверяет существует ли счет с таким Id
-        /// </summary>
-        /// <param name="id">Id счета</param>
-        /// <returns></returns>
-        public bool CheckId(int id)
-        {
-            foreach (var item in bank_accounts)
-            {
-                if (item.Id == id)
-                    return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Устанавливает Id банковского счета
-        /// </summary>
-        /// <returns>Id</returns>
-        private int SetBankAccountId()
-        {
-            if (bank_accounts.Count == 0)
-                return 1;
-            int i = 0;
-            foreach (var el in bank_accounts)
-            {
-                i++;
-                if (el.Id != i)
-                    return i;
-            }
-            return bank_accounts.Count + 1;
-
         }
 
         /// <summary>
