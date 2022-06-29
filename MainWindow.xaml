@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lvClients" Margin="456,9,10,9" SelectionChanged="lvClients_SelectionChanged">
+        <ListView x:Name="lvClients" Margin="456,9,10,9" SelectionChanged="LvClients_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
@@ -18,11 +18,12 @@
             </ListView.View>
         </ListView>
 
-        <ListView x:Name="lvAccounts" Margin="335,10,349,280" >
+        <ListView x:Name="lvAccounts" Margin="242,10,349,280" >
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
                     <GridViewColumn Header="Money" DisplayMemberBinding="{Binding Money}" Width="80"/>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="95"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -43,7 +44,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="168,10,0,0" TextWrapping="Wrap" Text="Деньги" VerticalAlignment="Top" Width="42"/>
         <TextBox x:Name="Money" HorizontalAlignment="Left" Margin="150,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
 
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="232,31,0,0" VerticalAlignment="Top" Width="98">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="139,145,0,0" VerticalAlignment="Top" Width="98">
             <TextBlock>Депозитный</TextBlock>
             <TextBlock>Недепозитный</TextBlock>
         </ComboBox>
@@ -67,6 +68,7 @@
         <TextBox x:Name="TransferAmount" HorizontalAlignment="Left" Margin="168,356,0,0" VerticalAlignment="Top" Width="60"/>
 
         <Button Content="Перевод" HorizontalAlignment="Left" Margin="166,391,0,0" VerticalAlignment="Top" Width="61" Click="ButtonTransferAmount_Click"/>
+        <Label Content="Тип счета" HorizontalAlignment="Left" Margin="156,119,0,0" VerticalAlignment="Top"/>
 
 
     </Grid>

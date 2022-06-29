@@ -20,16 +20,16 @@ namespace Banking_System_Prototype
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Repository repository;
+        private readonly Repository<string> repository;
         public MainWindow()
         {
-            repository = new Repository();
+            repository = new Repository<string>();
             repository.Load();
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();
         }
 
-        private void lvClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LvClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lvAccounts.ItemsSource = repository.ShowBankAccounts((lvClients.SelectedItem as Client).Id);
         }
@@ -40,7 +40,9 @@ namespace Banking_System_Prototype
 
             if (lvClients.SelectedItem == null) return;
 
-            repository.OpenBankAccount((lvClients.SelectedItem as Client).Id, int.Parse(Money.Text));
+            if (string.IsNullOrWhiteSpace(comboBox.Text)) { MessageBox.Show("Выберите тип счета"); return; }
+
+            repository.OpenBankAccount((lvClients.SelectedItem as Client).Id, int.Parse(Money.Text),comboBox.Text);
             repository.Save();
             lvAccounts.Items.Refresh();
         }
@@ -60,12 +62,17 @@ namespace Banking_System_Prototype
             lvClients.Items.Refresh();
         }
 
+        public void ShowErr()
+        {
+            
+        }
+
         private void ButtonTransferAmount_Click(object sender, RoutedEventArgs e)
         {
 
             if (!repository.MoneyTransfer(FromClientId.Text, FromAccountId.Text, ToClientId.Text, ToAccountId.Text, TransferAmount.Text))
             {
-                MessageBox.Show("Ошибка в заполнение данных или нехватка денег на счету");
+                MessageBox.Show("Ошибка в заполнение данных или нехватка денег на счету или вы пытаетесь вывести деньги с депозитного счета");
                 return;
             }
             MessageBox.Show("Перевод успешно выполнен!");

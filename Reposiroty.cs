@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Banking_System_Prototype
 {
-    internal class Repository
+    internal class Repository<T>
     {
         private readonly List<Client> clients = new List<Client>();
 
@@ -63,17 +63,17 @@ namespace Banking_System_Prototype
         /// <param name="toAccountId">Id счета получателя</param>
         /// <param name="money">Сумма перевода</param>
         /// <returns></returns>
-        public bool MoneyTransfer(string fromClientId, string fromAccountId, string toClientId, string toAccountId, string money)
+        public bool MoneyTransfer(T fromClientId, T fromAccountId, T toClientId, T toAccountId, T money)
         {
-            if (!CheckClientId(fromClientId) || !CheckClientId(toClientId))
+            if (!CheckClientId(fromClientId.ToString()) || !CheckClientId(toClientId.ToString()))
                 return false;
-            if (!CheckAccountId(int.Parse(fromClientId), fromAccountId) || !CheckAccountId(int.Parse(toClientId), toAccountId))
+            if (!CheckAccountId(int.Parse(fromClientId.ToString()), fromAccountId.ToString()) || !CheckAccountId(int.Parse(toClientId.ToString()), toAccountId.ToString()))
                 return false;
-            if (!int.TryParse(money, out _))
+            if (!int.TryParse(money.ToString(), out _))
                 return false;
-            if (!clients[int.Parse(fromClientId) - 1].Transfer(int.Parse(fromAccountId), int.Parse(money)))
+            if (!clients[int.Parse(fromClientId.ToString()) - 1].Transfer(int.Parse(fromAccountId.ToString()), int.Parse(money.ToString())))
             {
-                clients[int.Parse(toClientId) -1].AddMoney(int.Parse(toAccountId),int.Parse(money));
+                clients[int.Parse(toClientId.ToString()) -1].AddMoney(int.Parse(toAccountId.ToString()),int.Parse(money.ToString()));
                 return true;
             }
             return false;
@@ -95,9 +95,9 @@ namespace Banking_System_Prototype
         /// </summary>
         /// <param name="id">Id клинта </param>
         /// <param name="money">Деньги</param>
-        public void OpenBankAccount(int id, int money)
+        public void OpenBankAccount(int id, int money, string type)
         {
-            clients[id - 1].AddBankAccount(money);
+            clients[id - 1].AddBankAccount(money,type);
         }
 
         /// <summary>

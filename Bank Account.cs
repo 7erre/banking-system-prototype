@@ -8,10 +8,11 @@ namespace Banking_System_Prototype
 {
     internal class Bank_Account
     {
-        public Bank_Account(int id, int money)
+        public Bank_Account(int id, int money, string type)
         {
             Id = id;
             Money = money;
+            Type = type;
         }
 
         /// <summary>
@@ -23,5 +24,10 @@ namespace Banking_System_Prototype
         /// Деньги
         /// </summary>
         public int Money { get; set; }
+
+        /// <summary>
+        /// Тип счета
+        /// </summary>
+        public string Type { get; private set; }
     }
 }

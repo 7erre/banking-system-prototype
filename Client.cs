@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace Banking_System_Prototype
 {
@@ -35,9 +36,22 @@ namespace Banking_System_Prototype
         /// Открывает банковский счет у клиента
         /// </summary>
         /// <param name="money">Деньги</param>
-        public void AddBankAccount(int money)
+        public void AddBankAccount(int money, string type)
         {
-            bank_accounts.Add(new Bank_Account(SetBankAccountId(), money));
+            if (bank_accounts.Count == 2)
+            {
+                MessageBox.Show("Больше 2-х счетов открывать нельзя");
+                return;
+            }
+            foreach (var item in bank_accounts)
+            {
+                if (item.Type == type)
+                {
+                    MessageBox.Show("Счет с таким типом уже существует, выберите другой");
+                    return;
+                }
+            }
+            bank_accounts.Add(new Bank_Account(SetBankAccountId(), money, type));
         }
 
         /// <summary>
@@ -64,7 +78,7 @@ namespace Banking_System_Prototype
         {
             foreach (var item in json)
             {
-                bank_accounts.Add(new Bank_Account(int.Parse(item["id"].ToString()),int.Parse(item["money"].ToString())));
+                bank_accounts.Add(new Bank_Account(int.Parse(item["id"].ToString()),int.Parse(item["money"].ToString()), item["type"].ToString()));
             }
         }
 
@@ -80,7 +94,8 @@ namespace Banking_System_Prototype
                 JObject accountObj = new JObject()
                 {
                     ["id"] = account.Id,
-                    ["money"] = account.Money
+                    ["money"] = account.Money,
+                    ["type"] = account.Type
                 };
                 accountsArray.Add(accountObj);
             }
@@ -111,7 +126,6 @@ namespace Banking_System_Prototype
             if (bank_accounts.Count == 0)
                 return 1;
             int i = 0;
-            //bank_accounts.Sort();   // Сделать сортировку по Id
             foreach (var el in bank_accounts)
             {
                 i++;
@@ -140,6 +154,8 @@ namespace Banking_System_Prototype
         /// <returns></returns>
         public bool Transfer(int id, int money)
         {
+            if (bank_accounts[id-1].Type == "Депозитный")
+                return true;
             if (bank_accounts[id-1].Money - money < 0)
                 return true;
             bank_accounts[id-1].Money -= money;
