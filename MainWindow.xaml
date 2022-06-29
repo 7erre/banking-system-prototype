@@ -48,5 +48,26 @@
             <TextBlock>Недепозитный</TextBlock>
         </ComboBox>
 
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="От кого" Margin="57,250,0,0"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Кому" Margin="312,250,0,0"/>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id пользователя" Margin="282,271,0,0"/>
+        <TextBox x:Name="FromClientId" HorizontalAlignment="Left" Margin="52,292,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id пользователя" Margin="34,271,0,0"/>
+        <TextBox x:Name="ToClientId" HorizontalAlignment="Left" Margin="296,292,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id счёта" Margin="60,326,0,0"/>
+        <TextBox x:Name="FromAccountId" HorizontalAlignment="Left" Margin="50,347,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Id счёта" Margin="304,326,0,0"/>
+        <TextBox x:Name="ToAccountId" HorizontalAlignment="Left" Margin="296,347,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Сумма перевода" Margin="152,334,0,0"/>
+        <TextBox x:Name="TransferAmount" HorizontalAlignment="Left" Margin="168,356,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <Button Content="Перевод" HorizontalAlignment="Left" Margin="166,391,0,0" VerticalAlignment="Top" Width="61" Click="ButtonTransferAmount_Click"/>
+
+
     </Grid>
 </Window>

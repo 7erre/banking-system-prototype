@@ -25,11 +25,6 @@ namespace Banking_System_Prototype
         {
             repository = new Repository();
             repository.Load();
-            //repository.AddClient("badin", "roma", "891121212");
-            //repository.OpenBankAccount(1, 10000);
-            //repository.OpenBankAccount(1, 20000);
-            //repository.OpenBankAccount(1, 30000);
-
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();
         }
@@ -41,8 +36,7 @@ namespace Banking_System_Prototype
 
         private void ButtonAddAccount_Click(object sender, RoutedEventArgs e)
         {
-
-            if (!int.TryParse(Money.Text, out int money)) return;
+            if (!int.TryParse(Money.Text, out _)) return;
 
             if (lvClients.SelectedItem == null) return;
 
@@ -64,6 +58,18 @@ namespace Banking_System_Prototype
             repository.AddClient(LastName.Text, FirstName.Text, PhoneNumber.Text);
             repository.Save();
             lvClients.Items.Refresh();
+        }
+
+        private void ButtonTransferAmount_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!repository.MoneyTransfer(FromClientId.Text, FromAccountId.Text, ToClientId.Text, ToAccountId.Text, TransferAmount.Text))
+            {
+                MessageBox.Show("Ошибка в заполнение данных или нехватка денег на счету");
+                return;
+            }
+            MessageBox.Show("Перевод успешно выполнен!");
+            lvAccounts.Items.Refresh();
         }
     }
 }

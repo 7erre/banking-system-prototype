@@ -12,9 +12,71 @@ namespace Banking_System_Prototype
     internal class Repository
     {
         private readonly List<Client> clients = new List<Client>();
+
+        /// <summary>
+        /// Добавляет клиента
+        /// </summary>
+        /// <param name="LastName">Фамилия</param>
+        /// <param name="FirstName">Имя</param>
+        /// <param name="PhoneNumber">Номер телефона</param>
         public void AddClient(string LastName, string FirstName, string PhoneNumber)
         {
             clients.Add(new Client(SetId(), LastName, FirstName, PhoneNumber));
+        }
+
+        /// <summary>
+        /// Проверка Id клиента
+        /// </summary>
+        /// <param name="id">Id клмента</param>
+        /// <returns></returns>
+        public bool CheckClientId(string id)
+        {
+            if (!int.TryParse(id, out _))
+                return false;
+            foreach (var item in clients)
+            {
+                if (item.Id == int.Parse(id))
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Проверка Id счета у клиента
+        /// </summary>
+        /// <param name="clientId">Id клиента</param>
+        /// <param name="accountId">Id счета</param>
+        /// <returns></returns>
+        public bool CheckAccountId(int clientId, string accountId)
+        {
+            if (!int.TryParse(accountId, out _))
+                return false;
+            return clients[clientId - 1].CheckId(int.Parse(accountId));
+        }
+
+        /// <summary>
+        /// Проверка и перевод денег
+        /// </summary>
+        /// <param name="fromClientId">Id отправщика</param>
+        /// <param name="fromAccountId">Id счета отправщкиа</param>
+        /// <param name="toClientId">Id получателя</param>
+        /// <param name="toAccountId">Id счета получателя</param>
+        /// <param name="money">Сумма перевода</param>
+        /// <returns></returns>
+        public bool MoneyTransfer(string fromClientId, string fromAccountId, string toClientId, string toAccountId, string money)
+        {
+            if (!CheckClientId(fromClientId) || !CheckClientId(toClientId))
+                return false;
+            if (!CheckAccountId(int.Parse(fromClientId), fromAccountId) || !CheckAccountId(int.Parse(toClientId), toAccountId))
+                return false;
+            if (!int.TryParse(money, out _))
+                return false;
+            if (!clients[int.Parse(fromClientId) - 1].Transfer(int.Parse(fromAccountId), int.Parse(money)))
+            {
+                clients[int.Parse(toClientId) -1].AddMoney(int.Parse(toAccountId),int.Parse(money));
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

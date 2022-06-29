@@ -88,6 +88,21 @@ namespace Banking_System_Prototype
         }
 
         /// <summary>
+        /// Проверяет существует ли счет с таким Id
+        /// </summary>
+        /// <param name="id">Id счета</param>
+        /// <returns></returns>
+        public bool CheckId(int id)
+        {
+            foreach (var item in bank_accounts)
+            {
+                if (item.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Устанавливает Id банковского счета
         /// </summary>
         /// <returns>Id</returns>
@@ -105,6 +120,30 @@ namespace Banking_System_Prototype
             }
             return bank_accounts.Count + 1;
 
+        }
+
+        /// <summary>
+        /// Добавляет деньги на счет
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="money"></param>
+        public void AddMoney(int id, int money)
+        {
+            bank_accounts[id-1].Money += money;
+        }
+
+        /// <summary>
+        /// Проверка и вычет денег со счета
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        public bool Transfer(int id, int money)
+        {
+            if (bank_accounts[id-1].Money - money < 0)
+                return true;
+            bank_accounts[id-1].Money -= money;
+            return false;
         }
 
         public List<Bank_Account> ShowAccount()
