@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
+using System.Windows;
 
 namespace Banking_System_Prototype
 {
     internal class Repository
     {
+        public event Action<string> ClientAdded;
+        private readonly Logger Log = LogManager.GetLogger(typeof(Repository).ToString());
         private readonly List<Client> clients = new List<Client>();
+
+        public Repository()
+        {
+            Client.BankAccountChanged += BankAccountChanged;
+        }
 
         /// <summary>
         /// Добавляет клиента
@@ -21,7 +30,26 @@ namespace Banking_System_Prototype
         /// <param name="PhoneNumber">Номер телефона</param>
         public void AddClient(string LastName, string FirstName, string PhoneNumber)
         {
-            clients.Add(new Client(SetId(), LastName, FirstName, PhoneNumber));
+            int id = SetId();
+            clients.Add(new Client(id, LastName, FirstName, PhoneNumber));
+            ClientAdded?.Invoke($"Клиент {LastName} {FirstName} добавлен в систему.");
+            Log.Info($"{LastName} {FirstName} добавлен в систему с Id: {id}. Его номер телефона {PhoneNumber}.");
+        }
+
+        /// <summary>
+        /// Устанавливает Id клиенту
+        /// </summary>
+        /// <returns></returns>
+        private int SetId()
+        {
+            if (clients.Count == 0)
+                return 1;
+            return clients.Count + 1;
+        }
+
+        private void BankAccountChanged(string Msg)
+        {
+            MessageBox.Show(Msg);
         }
 
         /// <summary>
@@ -73,7 +101,7 @@ namespace Banking_System_Prototype
                 return false;
             if (!clients[int.Parse(fromClientId) - 1].Transfer(int.Parse(fromAccountId), int.Parse(money)))
             {
-                clients[int.Parse(toClientId.ToString()) -1].AddMoney(int.Parse(toAccountId.ToString()),int.Parse(money.ToString()));
+                clients[int.Parse(toClientId.ToString()) - 1].AddMoney(int.Parse(toAccountId.ToString()), int.Parse(money.ToString()));
                 return true;
             }
             return false;
@@ -87,18 +115,7 @@ namespace Banking_System_Prototype
         /// <param name="money"></param>
         public void TopUpAccount(int clientId, int accountId, int money)
         {
-            clients[clientId-1].AddMoney(accountId, money);
-        }
-
-        /// <summary>
-        /// Устанавливает Id клиенту
-        /// </summary>
-        /// <returns>Id</returns>
-        private int SetId()
-        {
-            if (clients.Count == 0)
-                return 1;
-            return clients.Count + 1;
+            clients[clientId - 1].AddMoney(accountId, money);
         }
 
         /// <summary>

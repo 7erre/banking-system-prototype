@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using NLog;
 
 namespace Banking_System_Prototype
 {
@@ -27,11 +27,17 @@ namespace Banking_System_Prototype
             repository.Load();
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();
+            repository.ClientAdded += ClientAdded;
         }
 
         private void LvClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lvAccounts.ItemsSource = repository.ShowBankAccounts((lvClients.SelectedItem as Client).Id);
+        }
+
+        private void ClientAdded(string Msg)
+        {
+            MessageBox.Show(Msg);
         }
 
         private void ButtonAddAccount_Click(object sender, RoutedEventArgs e)
@@ -69,7 +75,6 @@ namespace Banking_System_Prototype
                 MessageBox.Show("Ошибка в заполнение данных или нехватка денег на счету или вы пытаетесь вывести деньги с депозитного счета");
                 return;
             }
-            MessageBox.Show("Перевод успешно выполнен!");
             repository.Save();
             lvAccounts.Items.Refresh();
         }

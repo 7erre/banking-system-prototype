@@ -6,11 +6,14 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Windows;
+using NLog;
 
 namespace Banking_System_Prototype
 {
     internal class Client
     {
+        private readonly Logger Log = LogManager.GetLogger(typeof(Client).ToString());
+        public static event Action<string> BankAccountChanged;
         private readonly List<Bank_Account> bank_accounts = new List<Bank_Account>();
 
         /// <summary>
@@ -77,15 +80,18 @@ namespace Banking_System_Prototype
                 MessageBox.Show("Больше 2-х счетов открывать нельзя");
                 return;
             }
-            foreach (var item in bank_accounts)
+            foreach (var el in bank_accounts)
             {
-                if (item.Type == type)
+                if (el.Type == type)
                 {
                     MessageBox.Show("Счет с таким типом уже существует, выберите другой");
                     return;
                 }
             }
-            bank_accounts.Add(new Bank_Account(SetBankAccountId(), 0, type));
+            int bankId = SetBankAccountId();
+            bank_accounts.Add(new Bank_Account(bankId, 0, type));
+            BankAccountChanged?.Invoke($"Клиенту {LastName} {FirstName} открыли {type} счёт.");
+            Log.Info($"Клиенту {LastName} {FirstName} открыли {type} счёт. Id клиента: {Id}, Id счёта: {bankId}");
         }
 
         /// <summary>
@@ -99,6 +105,8 @@ namespace Banking_System_Prototype
                 if (el.Id == id)
                 {
                     bank_accounts.RemoveAt(bank_accounts.IndexOf(el));
+                    BankAccountChanged?.Invoke($"Клиенту {LastName} {FirstName} закрыли {el.Type} счёт.");
+                    Log.Info($"Клиенту {LastName} {FirstName} закрыли {el.Type} счёт. Id клиента: {Id}, Id счёта: {el.Id}.");
                     break;
                 }
             }
@@ -144,6 +152,8 @@ namespace Banking_System_Prototype
         public void AddMoney(int id, int money)
         {
             bank_accounts[id-1].Money += money;
+            BankAccountChanged($"Пополнение счета на сумму {money} успешно выполнено!");
+            Log.Info($"Клиенту {LastName} {FirstName} пополнили {bank_accounts[id-1].Type} счёт на сумму {money}. Id клиента: {Id}, Id счёта: {id}");
         }
 
         /// <summary>
@@ -166,6 +176,8 @@ namespace Banking_System_Prototype
         {
             return bank_accounts;
         }
+
+        //public Client() { }
 
         public Client(int id, string lastName, string firstName, string phoneName)
         {
