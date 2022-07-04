@@ -20,10 +20,10 @@ namespace Banking_System_Prototype
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Repository<string> repository;
+        private readonly Repository repository;
         public MainWindow()
         {
-            repository = new Repository<string>();
+            repository = new Repository();
             repository.Load();
             InitializeComponent();
             lvClients.ItemsSource = repository.ShowClients();

@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Banking_System_Prototype
 {
-    internal class Repository<T>
+    internal class Repository
     {
         private readonly List<Client> clients = new List<Client>();
 
@@ -63,15 +63,15 @@ namespace Banking_System_Prototype
         /// <param name="toAccountId">Id счета получателя</param>
         /// <param name="money">Сумма перевода</param>
         /// <returns></returns>
-        public bool MoneyTransfer(T fromClientId, T fromAccountId, T toClientId, T toAccountId, T money)
+        public bool MoneyTransfer(string fromClientId, string fromAccountId, string toClientId, string toAccountId, string money)
         {
-            if (!CheckClientId(fromClientId.ToString()) || !CheckClientId(toClientId.ToString()))
+            if (!CheckClientId(fromClientId) || !CheckClientId(toClientId))
                 return false;
-            if (!CheckAccountId(int.Parse(fromClientId.ToString()), fromAccountId.ToString()) || !CheckAccountId(int.Parse(toClientId.ToString()), toAccountId.ToString()))
+            if (!CheckAccountId(int.Parse(fromClientId), fromAccountId) || !CheckAccountId(int.Parse(toClientId), toAccountId))
                 return false;
-            if (!int.TryParse(money.ToString(), out _))
+            if (!int.TryParse(money, out _))
                 return false;
-            if (!clients[int.Parse(fromClientId.ToString()) - 1].Transfer(int.Parse(fromAccountId.ToString()), int.Parse(money.ToString())))
+            if (!clients[int.Parse(fromClientId) - 1].Transfer(int.Parse(fromAccountId), int.Parse(money)))
             {
                 clients[int.Parse(toClientId.ToString()) -1].AddMoney(int.Parse(toAccountId.ToString()),int.Parse(money.ToString()));
                 return true;

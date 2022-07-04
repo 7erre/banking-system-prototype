@@ -1,1 +1,4 @@
 Clients.json
+NLog.xsd
+NLog.config
+bin/Debug/logs/*.txt
